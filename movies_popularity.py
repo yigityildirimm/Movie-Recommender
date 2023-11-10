@@ -1,5 +1,5 @@
 import pandas as pd
-import streamlit as st
+
 
 links_df = pd.read_csv('links.csv')
 movies_df = pd.read_csv('movies.csv')

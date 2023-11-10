@@ -3,7 +3,7 @@ import streamlit as st
 
 st.title("Movie Recommender")
 st.write("Popular Movie Recommender")
-n = st.slider("Insert a number",0,100,1)
+n = st.slider("You can select number of most popular movies.",0,100,1)
 
 
 

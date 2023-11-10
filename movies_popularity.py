@@ -6,7 +6,7 @@ movies_df = pd.read_csv('movies.csv')
 ratings_df = pd.read_csv('ratings.csv')
 tags_df = pd.read_csv('tags.csv')
 
-
+st.title("Movie Recommender")
 
 ratings_mc_df=ratings_df.groupby("movieId")["rating"].agg(["mean","count"]).reset_index()
 

@@ -33,9 +33,8 @@ ratings_mc_merged_df = ratings_mc_df_merged[["movieId","title","genres", "mean",
 
 #create function
 def get_top_n(ratings_mc_merged_df, n):
-  top_n_movies_df=pd.DataFrame(ratings_mc_merged_df).nlargest(n,"overall_rating")
-  display=top_n_movies[["title","genres"]]  
-  return display
+  top_n_movies_df=pd.DataFrame(ratings_mc_merged_df).nlargest(n,"overall_rating") 
+  return top_n_movies_df
 
 
 x = get_top_n(ratings_mc_merged_df, n)

@@ -65,7 +65,7 @@ with becouse_you_like:
     st.write("Your favorite movie is:", input_feature)
     
     # py function get sparse matrix
-    def get_sparse_matrix(data: pd.DataFrame): 
+    def get_sparse_matrix(data): 
 
          return(movie_ratings_tags.pivot_table(data=movie_ratings_tags,
                                   values='rating',
@@ -77,7 +77,7 @@ with becouse_you_like:
 
 
     # py function item based recommender
-    def item_based_recommender(data: pd.DataFrame, title: str, n: int=5):
+    def item_based_recommender(data, title: str, n: int=5):
     
         sparse_matrix = get_sparse_matrix(movie_ratings_tags)
         

@@ -50,7 +50,7 @@ st.write(x)
 import base64
 
 
-st.markdown("![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)")
+st.markdown("![Alt Text](https://www.google.com/search?q=funny+movie+gifs&tbm=isch&ved=2ahUKEwizu4PHrrmCAxV7nv0HHS11DTAQ2-cCegQIABAA&oq=funny+movie+gifs&gs_lcp=CgNpbWcQAzIFCAAQgAQyBQgAEIAEMgYIABAFEB4yBggAEAgQHjIGCAAQCBAeMgYIABAIEB4yBggAEAgQHjIGCAAQCBAeMgYIABAIEB4yBggAEAgQHjoHCAAQigUQQzoGCAAQBxAeOggIABAFEAcQHjoICAAQCBAHEB5QrA9Y1RVg2RZoAHAAeACAAUuIAdYDkgEBN5gBAKABAaoBC2d3cy13aXotaW1nwAEB&sclient=img&ei=uxhOZfPxFfu89u8Preq1gAM&bih=931&biw=1920#imgrc=FxndYOMhSpdizM)")
 
 
 

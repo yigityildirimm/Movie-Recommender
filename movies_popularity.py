@@ -3,7 +3,10 @@ import streamlit as st
 
 st.title("Movie Recommender")
 st.write("Popular Movie Recommender")
-n = st.number_input("Insert a number")
+n = st.slider("Insert a number",0,100,1)
+
+
+
 
 links_df = pd.read_csv('links.csv')
 movies_df = pd.read_csv('movies.csv')

@@ -30,7 +30,7 @@ ratings_mc_df_merged=ratings_mc_df.merge(
     how="inner"
 )
 ratings_mc_merged_df = ratings_mc_df_merged[["movieId","title","genres", "mean", "count", "overall_rating"]]
-
+import streamlit as st
 #n = 3 for example top 3 films
 #create function
 def get_top_n(ratings_mc_merged_df, n):

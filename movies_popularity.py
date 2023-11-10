@@ -48,77 +48,54 @@ st.write(x)
 
 
 
-movies_df['year'] = movies_df['title'].str[-5:-1]
+# Merging movies and ratings on 'movieId'
+movie_ratings = pd.merge(movies_df, ratings_df, on='movieId')
+
+# Merging movie_ratings and tags on 'movieId'
+movie_ratings_tags = pd.merge(movie_ratings, tags_df, on='movieId')
 
 
-# In[23]:
+becouse_you_like = st.container()
 
+with becouse_you_like:
+    st.header('Similar to')
+    #st.text('Write a name')
+    #title = st.text_input("What is your favorite movie?")
+    #st.write("Your favorite movie is:", title)
+    
+    #selection_col, display_col = st.columns(2)
+    input_feature = str(st.text_input('Movie title'))
+    st.write("Your favorite movie is:", input_feature)
+    
+    # py function get sparse matrix
+    def get_sparse_matrix(data: pd.DataFrame): 
 
-movies_df['title'] = movies_df['title'].str[:-7].str.strip()
-
-
-# In[24]:
-
-
-user_movie_matrix = pd.pivot_table(data=ratings_df,
+         return(movie_ratings_tags.pivot_table(data=movie_ratings_tags,
                                   values='rating',
-                                  index='userId',
-                                  columns='movieId',
-                                  fill_value=0)
+                                  index='userId_x',
+                                  columns='title',
+                                  fill_value=0)            
+         )
 
 
-# In[ ]:
 
+    # py function item based recommender
+    def item_based_recommender(data: pd.DataFrame, title: str, n: int=5):
+    
+        sparse_matrix = get_sparse_matrix(movie_ratings_tags)
+        
+        return(
+             sparse_matrix
+                 .corrwith(sparse_matrix[title])
+                 .sort_values(ascending=False)
+                 .index
+                 .to_list()[1:n+1]
+             )
+    similar_movies = item_based_recommender(movie_ratings_tags, input_feature)
+    
+    
+    
+    
 
-item_correlations_matrix = user_movie_matrix.corr(method='pearson')
-
-
-# In[ ]:
-
-
-# Function to get similar movies
-def get_similar_movies(movie_name, n=5):
-    # Check if the movie exists in the movies dataframe
-    if movie_name not in movies_df['title'].values:
-        return f"Movie '{movie_name}' not found in the dataset."
-
-    # Get the movieId for the input movie name
-    movie_id = movies_df.loc[movies_df['title'] == movie_name, 'movieId'].values[0]
-
-    # Get the correlation vector for the input movie
-    corr_vector = item_correlations_matrix[movie_id]
-
-    # Get the top n similar movies based on correlation
-    similar_movie_ids = corr_vector.sort_values(ascending=False).index[1:n+1]
-
-    # Retrieve the movie information (title, genres, year) for the similar movies
-    similar_movies_info = movies_df[movies_df['movieId'].isin(similar_movie_ids)][['title', 'genres', 'year']]
-
-    return similar_movies_info
-
-
-# In[ ]:
-
-
-# Streamlit app
-def main():
-    st.title("Movie Recommendation System")
-
-    # Create input fields for the user to specify the movie and number of recommendations
-    movie_title = st.text_input("Enter a Movie Title:", "Monsters, Inc.")  # Default value provided
-    n = st.slider("Number of Recommendations", min_value=1, max_value=20, value=1)
-
-    # Add a button to trigger recommendations
-    if st.button("Get Recommendations"):
-        recommendations = get_similar_movies(movie_title, n)
-
-        if isinstance(recommendations, pd.DataFrame):
-            st.header(f"Top {n} Movie Recommendations for '{movie_title}':")
-            st.table(recommendations)
-        else:
-            st.warning(recommendations)
-
-if __name__ == "__main__":
-    main()
-
+    st.dataframe(similar_movies)
 

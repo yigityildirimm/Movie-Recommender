@@ -50,7 +50,7 @@ st.write(x)
 import base64
 
 
-st.markdown("![Alt Text](https://giphy.com/gifs/90s-clueless-3hxk2aOwWmfOU)")
+st.markdown("![Alt Text](https://media.giphy.com/media/KpACNEh8jXK2Q/giphy.gif)")
 
 
 

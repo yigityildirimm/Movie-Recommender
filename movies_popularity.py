@@ -46,55 +46,50 @@ st.write(x)
 
 
 
+# Merging movies and ratings on 'movieId'
 movie_ratings = pd.merge(movies_df, ratings_df, on='movieId')
 
 # Merging movie_ratings and tags on 'movieId'
 movie_ratings_tags = pd.merge(movie_ratings, tags_df, on='movieId')
 
 
+# Defining functions
+
+def get_sparse_matrix(data: pd.DataFrame):
+    return data.pivot_table(values='rating', index='userId_x', columns='title', fill_value=0)
+
+def item_based_recommender(data: pd.DataFrame, title: str, n: int = 5):
+    sparse_matrix = get_sparse_matrix(data)
+    
+    if title not in sparse_matrix.columns:
+        return "Movie not found in the database."
+
+    similar_movies = (
+        sparse_matrix.corrwith(sparse_matrix[title])
+        .sort_values(ascending=False)
+        .index
+        .to_list()[1:n+1]
+    )
+    return similar_movies
+
+
+# Streamlit app
+
 becouse_you_like = st.container()
 
 with becouse_you_like:
-    st.header('Similar to')
-    #st.text('Write a name')
-    #title = st.text_input("What is your favorite movie?")
-    #st.write("Your favorite movie is:", title)
+    st.header('Similar Movies Recommendation')
     
-    #selection_col, display_col = st.columns(2)
-    input_feature = str(st.text_input('Movie title'))
-    st.write("Your favorite movie is:", input_feature)
+    input_feature = st.text_input('Enter a movie title', '')  # Get user input
     
-    # py function get sparse matrix
-    def get_sparse_matrix(movie_ratings_tags): 
-
-         return(movie_ratings_tags.pivot_table(data=movie_ratings_tags,
-                                  values='rating',
-                                  index='userId_x',
-                                  columns='title',
-                                  fill_value=0)            
-         )
-
-
-
-    # py function item based recommender
-    def item_based_recommender(movie_ratings_tags, title: str, n: int=5):
-    
-        sparse_matrix = get_sparse_matrix(movie_ratings_tags)
+    if input_feature:
+        st.write("Your selected movie is:", input_feature)
+        similar_movies = item_based_recommender(movie_ratings_tags, input_feature)
         
-        return(
-             sparse_matrix
-                 .corrwith(sparse_matrix[title])
-                 .sort_values(ascending=False)
-                 .index
-                 .to_list()[1:n+1]
-             )
-    similar_movies = item_based_recommender(movie_ratings_tags, input_feature)
-    
-    
-    
-    
-
-    st.dataframe(similar_movies)
-
+        if isinstance(similar_movies, list):
+            st.write("Recommended movies:")
+            st.write(similar_movies)
+        else:
+            st.write(similar_movies)
 
 

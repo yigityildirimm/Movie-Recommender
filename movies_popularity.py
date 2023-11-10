@@ -5,7 +5,7 @@ st.title("Movie Recommender")
 st.write("Popular Movie Recommender")
 n = st.slider("You can select number of most popular movies.",0,100,1)
 st.write("You selected", n)
-st.write(get_top_n(ratings_mc_merged_df, n))
+
 
 
 links_df = pd.read_csv('links.csv')

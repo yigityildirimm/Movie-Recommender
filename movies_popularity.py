@@ -37,6 +37,6 @@ def get_top_n(ratings_mc_merged_df, n):
   return top_n_movies_df
 
 
-get_top_n(ratings_mc_merged_df, n)
+x = get_top_n(ratings_mc_merged_df, n)
 
-
+st.write(x)

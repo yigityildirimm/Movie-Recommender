@@ -31,7 +31,7 @@ def get_top_n(ratings_mc_merged_df, n):
 
 st.title("Movie Recommender")
 st.write("Popular Movie Recommender")
-n = st.number_input('Insert a number', step=int)
+n = st.number_input("Insert a number", step = int)
 
 get_top_n(ratings_mc_merged_df, n)
 

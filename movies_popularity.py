@@ -1,6 +1,10 @@
 import pandas as pd
 import streamlit as st
 
+st.title("Movie Recommender")
+st.write("Popular Movie Recommender")
+n = st.number_input("Insert a number")
+
 links_df = pd.read_csv('links.csv')
 movies_df = pd.read_csv('movies.csv')
 ratings_df = pd.read_csv('ratings.csv')
@@ -29,9 +33,6 @@ def get_top_n(ratings_mc_merged_df, n):
   top_n_movies_df=pd.DataFrame(ratings_mc_merged_df).nlargest(n,"overall_rating")
   return top_n_movies_df
 
-st.title("Movie Recommender")
-st.write("Popular Movie Recommender")
-n = st.number_input("Insert a number")
 
 get_top_n(ratings_mc_merged_df, n)
 

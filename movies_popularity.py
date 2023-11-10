@@ -8,7 +8,7 @@ tags_df = pd.read_csv('tags.csv')
 
 st.title("Movie Recommender")
 st.write("Popular Movie Recommender")
-n = st.number_input('Insert a number')
+n = st.number_input(('Insert a number'),step=int)
 st.write('The current number is ', n)
 
 ratings_mc_df=ratings_df.groupby("movieId")["rating"].agg(["mean","count"]).reset_index()

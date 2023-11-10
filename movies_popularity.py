@@ -106,7 +106,7 @@ def main():
 
     # Create input fields for the user to specify the movie and number of recommendations
     movie_title = st.text_input("Enter a Movie Title:", "Monsters, Inc.")  # Default value provided
-    n = st.slider("Number of Recommendations", min_value=1, max_value=20, value=10)
+    n = st.slider("Number of Recommendations", min_value=1, max_value=20, value=1)
 
     # Add a button to trigger recommendations
     if st.button("Get Recommendations"):

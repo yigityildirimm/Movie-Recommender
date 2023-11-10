@@ -7,7 +7,9 @@ ratings_df = pd.read_csv('ratings.csv')
 tags_df = pd.read_csv('tags.csv')
 
 st.title("Movie Recommender")
-st.write("Test")
+st.write("Popular Movie Recommender")
+n = st.number_input('Insert a number')
+st.write('The current number is ', n)
 
 ratings_mc_df=ratings_df.groupby("movieId")["rating"].agg(["mean","count"]).reset_index()
 
@@ -32,6 +34,6 @@ def get_top_n(ratings_mc_merged_df, n):
   top_n_movies_df=pd.DataFrame(ratings_mc_merged_df).nlargest(n,"overall_rating")
   return top_n_movies_df
 
-get_top_n(ratings_mc_merged_df, 4)
+get_top_n(ratings_mc_merged_df, n)
 
 

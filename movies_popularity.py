@@ -1,6 +1,13 @@
 import pandas as pd
 import streamlit as st
 
+
+import base64
+
+
+st.markdown("![Alt Text](https://media.giphy.com/media/KpACNEh8jXK2Q/giphy.gif)")
+
+
 st.title("Movie Recommender")
 st.write("Popular Movie Recommender")
 n = st.slider("You can select number of most popular movies.",0,100,1)
@@ -47,10 +54,7 @@ st.write(x)
 
 
 ######
-import base64
 
-
-st.markdown("![Alt Text](https://media.giphy.com/media/KpACNEh8jXK2Q/giphy.gif)")
 
 
 
